@@ -1,48 +1,20 @@
 ---
 
-# Actividad 3: Revisión de Requerimientos del Proyecto Final
+# Actividad 4: Pruebas Funcionales Integrales
 
-## 1. Matriz de Avance del Sistema
+## Matriz de Pruebas Ejecutada
 
-| # | Requerimiento del Sistema | Estado (Terminado / Parcial / Pendiente) |
-| :--- | :--- | :--- |
-| **1** | **Base de datos diseñada y normalizada** | Terminado |
-| **2** | **Backend desarrollado con Django** | Terminado |
-| **3** | **API REST** | Terminado |
-| **4** | **Autenticación** | Terminado |
-| **5** | **Operaciones CRUD** | Terminado |
-| **6** | **Frontend desarrollado con React** | Terminado |
-| **7** | **Formularios con validación** | Terminado |
-| **8** | **Interfaz responsiva** | Terminado |
-| **9** | **Repositorio Git** | Terminado |
-| **10**| **Documentación** | Terminado |
-| **11**| **Pruebas** | Parcial |
-| **12**| **Despliegue o simulación documentada**| Terminado |
+| ID | Funcionalidad | Datos de Entrada | Resultado Esperado | Resultado Obtendido | Estado |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **CP-01** | Inicio de sesión correcto | Usuario: `root` / Pass: `******` | Acceso concedido al dashboard. | Acceso correcto al panel principal. | exitoso |
+| **CP-02** | Inicio de sesión incorrecto | Usuario: `root` / Pass: `error123` | Bloqueo y mensaje de alerta. | Acceso denegado con credenciales inválidas. | exitoso |
+| **CP-03** | Alta válida | Título: `Registro de prueba #3` | Inserción en base de datos. | Registro creado y listado en la tabla. | exitoso |
+| **CP-04** | Alta con datos incompletos | Título: `""` (Vacío) | Bloqueo en cliente y alerta visual. | Formulario no enviado por validación obligatoria. | exitoso |
+| **CP-05** | Consulta | Petición GET al cargar la página | Listar registros con ID, Título y Descripción. | Registros 3, 4 y 5 renderizados correctamente. | exitoso |
+| **CP-06** | Modificación | Clic en botón "Editar" | Apertura de formulario de actualización. | Datos modificados de forma persistente. | exitoso |
+| **CP-07** | Eliminación | Clic en "Eliminar" del Registro #2 | Remoción física o lógica del elemento. | Mensaje: "¡Registro #2 eliminado con éxito...". | exitoso |
+| **CP-08** | Restricción de acceso | Intento de entrar a ruta directa | Redirección forzada hacia el Login. | Sistema bloquea peticiones sin Token activo. | exitoso |
+| **CP-09** | Validación frontend | Campos vacíos o caracteres inválidos | Restricción antes de enviar la petición. | Mensajes nativos evitan el envío de datos corruptos. | exitoso |
+| **CP-10** | Respuesta de la API | Interacción con Backend Django | HTTP Status 200/201 con JSON estructurado. | Django procesa y responde bajo estándares REST. | exitoso |
 
----
-
-## 2. Documentación del Despliegue en Producción (Vercel)
-
-Para cumplir con el requerimiento de puesta en marcha del Frontend en React, se utiliza la plataforma **Vercel** integrada directamente con el flujo de trabajo de GitHub.
-
-### Procedimiento de Configuración y Despliegue
-
-1. **Creación de cuenta e inicio de sesión:**
-   Se ingresa a `vercel.com` y se inicia sesión vinculando de forma directa la cuenta institucional o personal de **GitHub**.
-
-2. **Importación del Repositorio:**
-   * En el panel principal de Vercel, se hace clic en **"Add New"** y luego en **"Project"**.
-   * Se selecciona el repositorio correspondiente al proyecto actual: `mi-frontend-react`.
-
-3. **Configuración del Framework:**
-   * Vercel detecta automáticamente que el proyecto está estructurado con **React** (o Vite/Create React App).
-   * Se configuran los comandos por defecto en el panel visual:
-     * *Build Command:* `npm run build`
-     * *Output Directory:* `dist` (o `build` según la configuración de empaquetado).
-
-4. **Variables de Entorno (Producción):**
-   * En la sección *Environment Variables*, se añade la llave `REACT_APP_API_URL` o `VITE_API_URL` apuntando a la dirección URL de producción del servidor Backend en Django.
-
-5. **Lanzamiento (Deploy):**
-   * Se hace clic en el botón **"Deploy"**. Tras finalizar la compilación automatizada de los paquetes, Vercel genera un enlace HTTPS seguro de libre acceso público a internet.
 
