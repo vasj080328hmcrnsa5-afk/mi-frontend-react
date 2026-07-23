@@ -1,34 +1,48 @@
-# Evidencia: Lista de Verificación y Procedimiento de Respaldo
+---
 
-## 1. Lista de Verificación de Seguridad y Disponibilidad
+# Actividad 3: Revisión de Requerimientos del Proyecto Final
 
-| # | Elemento a Comprobar | Criterio de Aceptación / Estado |
+## 1. Matriz de Avance del Sistema
+
+| # | Requerimiento del Sistema | Estado (Terminado / Parcial / Pendiente) |
 | :--- | :--- | :--- |
-| **1** | **Contraseñas seguras** | Todas las cuentas usan contraseñas de al menos 16 caracteres, combinando mayúsculas, minúsculas, números y símbolos. |
-| **2** | **Variables de entorno** | Ninguna credencial está hardcoded. Se leen exclusivamente desde un archivo `.env` protegido. |
-| **3** | **Acceso restringido** | El acceso a la base de datos y servidores está limitado por IPs específicas o VPN. |
-| **4** | **Copias de seguridad** | Existen respaldos programados automáticos guardados en un almacenamiento aislado. |
-| **5** | **Registro de errores** | Los logs registran fallos críticos pero nunca almacenan datos sensibles de los usuarios. |
-| **6** | **Disponibilidad del servicio** | Se implementó una herramienta de monitoreo (ej. UptimeRobot) para alertar si el servicio se cae. |
-| **7** | **Uso de HTTPS** | El sitio cuenta con un certificado SSL/TLS válido y todo el tráfico HTTP se redirige a HTTPS. |
-| **8** | **Protección de archivos** | Los archivos de configuración sensible (ej. `.env`) no son accesibles públicamente. |
-| **9** | **Permisos de usuarios** | La aplicación se ejecuta bajo un usuario del sistema sin privilegios de raíz (non-root). |
-| **10**| **Actualización de dependencias**| Se ejecutó un análisis de vulnerabilidades y las dependencias están actualizadas. |
+| **1** | **Base de datos diseñada y normalizada** | Terminado |
+| **2** | **Backend desarrollado con Django** | Terminado |
+| **3** | **API REST** | Terminado |
+| **4** | **Autenticación** | Terminado |
+| **5** | **Operaciones CRUD** | Terminado |
+| **6** | **Frontend desarrollado con React** | Terminado |
+| **7** | **Formularios con validación** | Terminado |
+| **8** | **Interfaz responsiva** | Terminado |
+| **9** | **Repositorio Git** | Terminado |
+| **10**| **Documentación** | Terminado |
+| **11**| **Pruebas** | Parcial |
+| **12**| **Despliegue o simulación documentada**| Terminado |
 
 ---
 
-## 2. Documentación del Procedimiento de Respaldo
+## 2. Documentación del Despliegue en Producción (Vercel)
 
-### Requisitos Previos
-* Terminal de comandos activa en VS Code.
-* Credenciales de administrador de la base de datos.
+Para cumplir con el requerimiento de puesta en marcha del Frontend en React, se utiliza la plataforma **Vercel** integrada directamente con el flujo de trabajo de GitHub.
 
-### Procedimiento de Ejecución Manual
-Para generar el respaldo, se abre la terminal integrada de VS Code y se ejecuta el siguiente comando:
+### Procedimiento de Configuración y Despliegue
 
-```bash
-mysqldump -u root -p mi_base_datos > respaldo_sistema.sql
-```
+1. **Creación de cuenta e inicio de sesión:**
+   Se ingresa a `vercel.com` y se inicia sesión vinculando de forma directa la cuenta institucional o personal de **GitHub**.
 
-### Verificación del Respaldo
-Se comprueba la existencia del archivo `respaldo_sistema.sql` en el explorador de archivos de VS Code y se valida que su tamaño sea superior a 0 KB. El archivo se añade al `.gitignore` para cumplir con las directivas de seguridad.
+2. **Importación del Repositorio:**
+   * En el panel principal de Vercel, se hace clic en **"Add New"** y luego en **"Project"**.
+   * Se selecciona el repositorio correspondiente al proyecto actual: `mi-frontend-react`.
+
+3. **Configuración del Framework:**
+   * Vercel detecta automáticamente que el proyecto está estructurado con **React** (o Vite/Create React App).
+   * Se configuran los comandos por defecto en el panel visual:
+     * *Build Command:* `npm run build`
+     * *Output Directory:* `dist` (o `build` según la configuración de empaquetado).
+
+4. **Variables de Entorno (Producción):**
+   * En la sección *Environment Variables*, se añade la llave `REACT_APP_API_URL` o `VITE_API_URL` apuntando a la dirección URL de producción del servidor Backend en Django.
+
+5. **Lanzamiento (Deploy):**
+   * Se hace clic en el botón **"Deploy"**. Tras finalizar la compilación automatizada de los paquetes, Vercel genera un enlace HTTPS seguro de libre acceso público a internet.
+
